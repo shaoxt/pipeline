@@ -1,0 +1,13 @@
+apiVersion: "pipeline.shaoxt/v1"
+kind: Stack
+metadata:
+  name: java-service
+spec:
+  stackSpec:
+     language: java
+     applicationType: service
+     sourceControl: Git
+     buildTool: Maven
+     testTool: JUnit
+     packagingTool: Docker
+status: Active

@@ -1,0 +1,15 @@
+apiVersion: "pipeline.shaoxt/v1"
+kind: Pipeline
+metadata:
+  name: simple
+spec:
+  pipelineSpec:
+     application: helloworld
+     stages:
+       - Checkout
+       - Build
+       - Packaging
+       - Ship
+       - Run
+     currentStage: Checkout
+status: Active

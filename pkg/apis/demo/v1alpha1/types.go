@@ -44,9 +44,9 @@ const (
 // Application Spec
 type ApplicationSpec struct {
 	//The template this application pickup at creation time
-	InitialTemplate Template `json:"initialTemplate,omitempty"`
+	InitialTemplate string `json:"initialTemplate,omitempty"`
 	//Application Template content for customization, if the template got changed by user
-	Template `json:"inline"`
+	TemplateSpec `json:"inline"`
 	//Git Repo
 	GitRepo GitRepo `json:"gitRepo,omitempty"`
 	//Owner of the application
@@ -70,6 +70,8 @@ type GitRepo struct {
 type Status struct {
 	//Phase of the application
 	Phase Phase `json:"phase,omitempty"`
+	//Message
+	Message string `json:"message,omitempty"`
 	// RFC 3339 date and time
 	StartTime *metav1.Time `json:"startTime,omitempty"`
 }
@@ -140,6 +142,7 @@ const (
 
 type ImageRepo string
 const (
+	DockerHub ImageRepo = "DockerHub"
 	ECR     ImageRepo = "ECR"
 	Nexus   ImageRepo = "Nexus"
 	//ETC.

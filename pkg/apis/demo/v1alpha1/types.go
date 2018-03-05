@@ -43,10 +43,10 @@ const (
 
 // Application Spec
 type ApplicationSpec struct {
-	//Application id is a unique identifier for the application
-	ApplicationId string `json:"applicationId"`
-	//Application Type
-	Stack Stack `json:"stack,omitempty"`
+	//The template this application pickup at creation time
+	InitialTemplate Template `json:"initialTemplate,omitempty"`
+	//Application Template content for customization, if the template got changed by user
+	Template `json:"inline"`
 	//Git Repo
 	GitRepo GitRepo `json:"gitRepo,omitempty"`
 	//Owner of the application
@@ -87,15 +87,15 @@ const (
 // +genclient
 // +nonNamespaced
 
-type Stack struct {
+type Template struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ObjectMeta       `json:"metadata,omitempty"`
 
-	Spec   StackSpec   `json:"spec,omitempty"`
+	Spec   TemplateSpec   `json:"spec,omitempty"`
 	Status Status `json:"status,omitempty"`
 }
 
-type StackSpec struct {
+type TemplateSpec struct {
 	Language Language  `json:"language"`
 	ApplicationType ApplicationType  `json:"applicationType"`
 	SourceControl SourceControl `json:"sourceControl"`
@@ -145,11 +145,11 @@ const (
 	//ETC.
 )
 
-type StackList struct {
+type TemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
 
-	Items []Stack `json:"items"`
+	Items []Template `json:"items"`
 }
 
 // +genclient

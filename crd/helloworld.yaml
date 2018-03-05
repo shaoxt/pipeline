@@ -4,8 +4,7 @@ metadata:
   name: helloworld
 spec:
   applicationSpec:
-     applicationId: helloworld001
-     stack: java-service
+     initialTemplate: java-service
      gitRepo:
         url: "https://github.com/shaoxt/helloworld"
         sharedSecret: "TurboTax"

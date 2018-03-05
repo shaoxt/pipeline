@@ -64,7 +64,7 @@ func (x *Application) CodecEncodeSelf(e *codec1978.Encoder) {
 				x.Kind != "",       // Kind
 				x.APIVersion != "", // APIVersion
 				false || x.ObjectMeta.Name != "" || x.ObjectMeta.GenerateName != "" || x.ObjectMeta.Namespace != "" || x.ObjectMeta.SelfLink != "" || x.ObjectMeta.UID != "" || x.ObjectMeta.ResourceVersion != "" || x.ObjectMeta.Generation != 0 || !(x.ObjectMeta.CreationTimestamp.IsZero()) || x.ObjectMeta.DeletionTimestamp != nil || x.ObjectMeta.DeletionGracePeriodSeconds != nil || len(x.ObjectMeta.Labels) != 0 || len(x.ObjectMeta.Annotations) != 0 || len(x.ObjectMeta.OwnerReferences) != 0 || x.ObjectMeta.Initializers != nil || len(x.ObjectMeta.Finalizers) != 0 || x.ObjectMeta.ClusterName != "",                                                                                                                                                                                                                                                                                                                                                                                                                                             // ObjectMeta
-				false || x.Spec.ApplicationId != "" || false || x.Spec.Stack.TypeMeta != pkg1_v1.TypeMeta{} || false || x.Spec.Stack.ObjectMeta.Name != "" || x.Spec.Stack.ObjectMeta.GenerateName != "" || x.Spec.Stack.ObjectMeta.Namespace != "" || x.Spec.Stack.ObjectMeta.SelfLink != "" || x.Spec.Stack.ObjectMeta.UID != "" || x.Spec.Stack.ObjectMeta.ResourceVersion != "" || x.Spec.Stack.ObjectMeta.Generation != 0 || !(x.Spec.Stack.ObjectMeta.CreationTimestamp.IsZero()) || x.Spec.Stack.ObjectMeta.DeletionTimestamp != nil || x.Spec.Stack.ObjectMeta.DeletionGracePeriodSeconds != nil || len(x.Spec.Stack.ObjectMeta.Labels) != 0 || len(x.Spec.Stack.ObjectMeta.Annotations) != 0 || len(x.Spec.Stack.ObjectMeta.OwnerReferences) != 0 || x.Spec.Stack.ObjectMeta.Initializers != nil || len(x.Spec.Stack.ObjectMeta.Finalizers) != 0 || x.Spec.Stack.ObjectMeta.ClusterName != "" || x.Spec.Stack.Spec != StackSpec{} || x.Spec.Stack.Status != Status{} || x.Spec.GitRepo != GitRepo{} || x.Spec.Owner != "" || x.Spec.VersioningScheme != "", // Spec
+				false || x.Spec.ApplicationId != "" || false || x.Spec.Template.TypeMeta != pkg1_v1.TypeMeta{} || false || x.Spec.Template.ObjectMeta.Name != "" || x.Spec.Template.ObjectMeta.GenerateName != "" || x.Spec.Template.ObjectMeta.Namespace != "" || x.Spec.Template.ObjectMeta.SelfLink != "" || x.Spec.Template.ObjectMeta.UID != "" || x.Spec.Template.ObjectMeta.ResourceVersion != "" || x.Spec.Template.ObjectMeta.Generation != 0 || !(x.Spec.Template.ObjectMeta.CreationTimestamp.IsZero()) || x.Spec.Template.ObjectMeta.DeletionTimestamp != nil || x.Spec.Template.ObjectMeta.DeletionGracePeriodSeconds != nil || len(x.Spec.Template.ObjectMeta.Labels) != 0 || len(x.Spec.Template.ObjectMeta.Annotations) != 0 || len(x.Spec.Template.ObjectMeta.OwnerReferences) != 0 || x.Spec.Template.ObjectMeta.Initializers != nil || len(x.Spec.Template.ObjectMeta.Finalizers) != 0 || x.Spec.Template.ObjectMeta.ClusterName != "" || x.Spec.Template.Spec != TemplateSpec{} || x.Spec.Template.Status != Status{} || x.Spec.GitRepo != GitRepo{} || x.Spec.Owner != "" || x.Spec.VersioningScheme != "", // Spec
 				x.Status != Status{}, // Status
 			}
 			_ = yyq2
@@ -455,7 +455,7 @@ func (x *ApplicationSpec) CodecEncodeSelf(e *codec1978.Encoder) {
 			const yyr2 bool = false // struct tag has 'toArray'
 			var yyq2 = [5]bool{     // should field at this index be written?
 				true, // ApplicationId
-				false || x.Stack.TypeMeta != pkg1_v1.TypeMeta{} || false || x.Stack.ObjectMeta.Name != "" || x.Stack.ObjectMeta.GenerateName != "" || x.Stack.ObjectMeta.Namespace != "" || x.Stack.ObjectMeta.SelfLink != "" || x.Stack.ObjectMeta.UID != "" || x.Stack.ObjectMeta.ResourceVersion != "" || x.Stack.ObjectMeta.Generation != 0 || !(x.Stack.ObjectMeta.CreationTimestamp.IsZero()) || x.Stack.ObjectMeta.DeletionTimestamp != nil || x.Stack.ObjectMeta.DeletionGracePeriodSeconds != nil || len(x.Stack.ObjectMeta.Labels) != 0 || len(x.Stack.ObjectMeta.Annotations) != 0 || len(x.Stack.ObjectMeta.OwnerReferences) != 0 || x.Stack.ObjectMeta.Initializers != nil || len(x.Stack.ObjectMeta.Finalizers) != 0 || x.Stack.ObjectMeta.ClusterName != "" || x.Stack.Spec != StackSpec{} || x.Stack.Status != Status{}, // Stack
+				false || x.Template.TypeMeta != pkg1_v1.TypeMeta{} || false || x.Template.ObjectMeta.Name != "" || x.Template.ObjectMeta.GenerateName != "" || x.Template.ObjectMeta.Namespace != "" || x.Template.ObjectMeta.SelfLink != "" || x.Template.ObjectMeta.UID != "" || x.Template.ObjectMeta.ResourceVersion != "" || x.Template.ObjectMeta.Generation != 0 || !(x.Template.ObjectMeta.CreationTimestamp.IsZero()) || x.Template.ObjectMeta.DeletionTimestamp != nil || x.Template.ObjectMeta.DeletionGracePeriodSeconds != nil || len(x.Template.ObjectMeta.Labels) != 0 || len(x.Template.ObjectMeta.Annotations) != 0 || len(x.Template.ObjectMeta.OwnerReferences) != 0 || x.Template.ObjectMeta.Initializers != nil || len(x.Template.ObjectMeta.Finalizers) != 0 || x.Template.ObjectMeta.ClusterName != "" || x.Template.Spec != TemplateSpec{} || x.Template.Status != Status{}, // Template
 				x.GitRepo != GitRepo{},   // GitRepo
 				x.Owner != "",            // Owner
 				x.VersioningScheme != "", // VersioningScheme
@@ -491,7 +491,7 @@ func (x *ApplicationSpec) CodecEncodeSelf(e *codec1978.Encoder) {
 			if yyr2 || yy2arr2 {
 				r.WriteArrayElem()
 				if yyq2[1] {
-					yy7 := &x.Stack
+					yy7 := &x.Template
 					yy7.CodecEncodeSelf(e)
 				} else {
 					r.EncodeNil()
@@ -499,9 +499,9 @@ func (x *ApplicationSpec) CodecEncodeSelf(e *codec1978.Encoder) {
 			} else {
 				if yyq2[1] {
 					r.WriteMapElemKey()
-					r.EncodeString(codecSelferCcUTF86706, `stack`)
+					r.EncodeString(codecSelferCcUTF86706, `Template`)
 					r.WriteMapElemValue()
-					yy9 := &x.Stack
+					yy9 := &x.Template
 					yy9.CodecEncodeSelf(e)
 				}
 			}
@@ -627,11 +627,11 @@ func (x *ApplicationSpec) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 			} else {
 				x.ApplicationId = (string)(r.DecodeString())
 			}
-		case "stack":
+		case "Template":
 			if r.TryDecodeAsNil() {
-				x.Stack = Stack{}
+				x.Template = Template{}
 			} else {
-				x.Stack.CodecDecodeSelf(d)
+				x.Template.CodecDecodeSelf(d)
 			}
 		case "gitRepo":
 			if r.TryDecodeAsNil() {
@@ -693,9 +693,9 @@ func (x *ApplicationSpec) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) 
 	}
 	r.ReadArrayElem()
 	if r.TryDecodeAsNil() {
-		x.Stack = Stack{}
+		x.Template = Template{}
 	} else {
-		x.Stack.CodecDecodeSelf(d)
+		x.Template.CodecDecodeSelf(d)
 	}
 	yyj9++
 	if yyhl9 {
@@ -1547,7 +1547,7 @@ func (x *Phase) CodecDecodeSelf(d *codec1978.Decoder) {
 	}
 }
 
-func (x *Stack) CodecEncodeSelf(e *codec1978.Encoder) {
+func (x *Template) CodecEncodeSelf(e *codec1978.Encoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperEncoder(e)
 	_, _, _ = h, z, r
@@ -1566,7 +1566,7 @@ func (x *Stack) CodecEncodeSelf(e *codec1978.Encoder) {
 				x.Kind != "",       // Kind
 				x.APIVersion != "", // APIVersion
 				false || x.ObjectMeta.Name != "" || x.ObjectMeta.GenerateName != "" || x.ObjectMeta.Namespace != "" || x.ObjectMeta.SelfLink != "" || x.ObjectMeta.UID != "" || x.ObjectMeta.ResourceVersion != "" || x.ObjectMeta.Generation != 0 || !(x.ObjectMeta.CreationTimestamp.IsZero()) || x.ObjectMeta.DeletionTimestamp != nil || x.ObjectMeta.DeletionGracePeriodSeconds != nil || len(x.ObjectMeta.Labels) != 0 || len(x.ObjectMeta.Annotations) != 0 || len(x.ObjectMeta.OwnerReferences) != 0 || x.ObjectMeta.Initializers != nil || len(x.ObjectMeta.Finalizers) != 0 || x.ObjectMeta.ClusterName != "", // ObjectMeta
-				x.Spec != StackSpec{}, // Spec
+				x.Spec != TemplateSpec{}, // Spec
 				x.Status != Status{},  // Status
 			}
 			_ = yyq2
@@ -1694,7 +1694,7 @@ func (x *Stack) CodecEncodeSelf(e *codec1978.Encoder) {
 	}
 }
 
-func (x *Stack) CodecDecodeSelf(d *codec1978.Decoder) {
+func (x *Template) CodecDecodeSelf(d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -1723,7 +1723,7 @@ func (x *Stack) CodecDecodeSelf(d *codec1978.Decoder) {
 	}
 }
 
-func (x *Stack) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
+func (x *Template) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -1767,7 +1767,7 @@ func (x *Stack) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 			}
 		case "spec":
 			if r.TryDecodeAsNil() {
-				x.Spec = StackSpec{}
+				x.Spec = TemplateSpec{}
 			} else {
 				x.Spec.CodecDecodeSelf(d)
 			}
@@ -1784,7 +1784,7 @@ func (x *Stack) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 	r.ReadMapEnd()
 }
 
-func (x *Stack) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
+func (x *Template) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -1856,7 +1856,7 @@ func (x *Stack) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	}
 	r.ReadArrayElem()
 	if r.TryDecodeAsNil() {
-		x.Spec = StackSpec{}
+		x.Spec = TemplateSpec{}
 	} else {
 		x.Spec.CodecDecodeSelf(d)
 	}
@@ -1892,7 +1892,7 @@ func (x *Stack) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	r.ReadArrayEnd()
 }
 
-func (x *StackSpec) CodecEncodeSelf(e *codec1978.Encoder) {
+func (x *TemplateSpec) CodecEncodeSelf(e *codec1978.Encoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperEncoder(e)
 	_, _, _ = h, z, r
@@ -2035,7 +2035,7 @@ func (x *StackSpec) CodecEncodeSelf(e *codec1978.Encoder) {
 	}
 }
 
-func (x *StackSpec) CodecDecodeSelf(d *codec1978.Decoder) {
+func (x *TemplateSpec) CodecDecodeSelf(d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -2064,7 +2064,7 @@ func (x *StackSpec) CodecDecodeSelf(d *codec1978.Decoder) {
 	}
 }
 
-func (x *StackSpec) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
+func (x *TemplateSpec) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -2138,7 +2138,7 @@ func (x *StackSpec) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 	r.ReadMapEnd()
 }
 
-func (x *StackSpec) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
+func (x *TemplateSpec) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -2409,7 +2409,7 @@ func (x *ImageRepo) CodecDecodeSelf(d *codec1978.Decoder) {
 	}
 }
 
-func (x *StackList) CodecEncodeSelf(e *codec1978.Encoder) {
+func (x *TemplateList) CodecEncodeSelf(e *codec1978.Encoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperEncoder(e)
 	_, _, _ = h, z, r
@@ -2513,7 +2513,7 @@ func (x *StackList) CodecEncodeSelf(e *codec1978.Encoder) {
 				} else {
 					if false {
 					} else {
-						h.encSliceStack(([]Stack)(x.Items), e)
+						h.encSliceTemplate(([]Template)(x.Items), e)
 					}
 				}
 			} else {
@@ -2525,7 +2525,7 @@ func (x *StackList) CodecEncodeSelf(e *codec1978.Encoder) {
 				} else {
 					if false {
 					} else {
-						h.encSliceStack(([]Stack)(x.Items), e)
+						h.encSliceTemplate(([]Template)(x.Items), e)
 					}
 				}
 			}
@@ -2538,7 +2538,7 @@ func (x *StackList) CodecEncodeSelf(e *codec1978.Encoder) {
 	}
 }
 
-func (x *StackList) CodecDecodeSelf(d *codec1978.Decoder) {
+func (x *TemplateList) CodecDecodeSelf(d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -2567,7 +2567,7 @@ func (x *StackList) CodecDecodeSelf(d *codec1978.Decoder) {
 	}
 }
 
-func (x *StackList) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
+func (x *TemplateList) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -2615,7 +2615,7 @@ func (x *StackList) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 			} else {
 				if false {
 				} else {
-					h.decSliceStack((*[]Stack)(&x.Items), d)
+					h.decSliceTemplate((*[]Template)(&x.Items), d)
 				}
 			}
 		default:
@@ -2625,7 +2625,7 @@ func (x *StackList) codecDecodeSelfFromMap(l int, d *codec1978.Decoder) {
 	r.ReadMapEnd()
 }
 
-func (x *StackList) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
+func (x *TemplateList) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -2701,7 +2701,7 @@ func (x *StackList) codecDecodeSelfFromArray(l int, d *codec1978.Decoder) {
 	} else {
 		if false {
 		} else {
-			h.decSliceStack((*[]Stack)(&x.Items), d)
+			h.decSliceTemplate((*[]Template)(&x.Items), d)
 		}
 	}
 	for {
@@ -3783,7 +3783,7 @@ func (x codecSelfer6706) decSliceApplication(v *[]Application, d *codec1978.Deco
 	}
 }
 
-func (x codecSelfer6706) encSliceStack(v []Stack, e *codec1978.Encoder) {
+func (x codecSelfer6706) encSliceTemplate(v []Template, e *codec1978.Encoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperEncoder(e)
 	_, _, _ = h, z, r
@@ -3796,7 +3796,7 @@ func (x codecSelfer6706) encSliceStack(v []Stack, e *codec1978.Encoder) {
 	r.WriteArrayEnd()
 }
 
-func (x codecSelfer6706) decSliceStack(v *[]Stack, d *codec1978.Decoder) {
+func (x codecSelfer6706) decSliceTemplate(v *[]Template, d *codec1978.Decoder) {
 	var h codecSelfer6706
 	z, r := codec1978.GenHelperDecoder(d)
 	_, _, _ = h, z, r
@@ -3807,7 +3807,7 @@ func (x codecSelfer6706) decSliceStack(v *[]Stack, d *codec1978.Decoder) {
 	_ = yyc1
 	if yyl1 == 0 {
 		if yyv1 == nil {
-			yyv1 = []Stack{}
+			yyv1 = []Template{}
 			yyc1 = true
 		} else if len(yyv1) != 0 {
 			yyv1 = yyv1[:0]
@@ -3823,7 +3823,7 @@ func (x codecSelfer6706) decSliceStack(v *[]Stack, d *codec1978.Decoder) {
 				if yyrl1 <= cap(yyv1) {
 					yyv1 = yyv1[:yyrl1]
 				} else {
-					yyv1 = make([]Stack, yyrl1)
+					yyv1 = make([]Template, yyrl1)
 				}
 				yyc1 = true
 			} else if yyl1 != len(yyv1) {
@@ -3840,14 +3840,14 @@ func (x codecSelfer6706) decSliceStack(v *[]Stack, d *codec1978.Decoder) {
 				} else {
 					yyrl1 = 8
 				}
-				yyv1 = make([]Stack, yyrl1)
+				yyv1 = make([]Template, yyrl1)
 				yyc1 = true
 			}
 			yyh1.ElemContainerState(yyj1)
 
 			var yydb1 bool
 			if yyj1 >= len(yyv1) {
-				yyv1 = append(yyv1, Stack{})
+				yyv1 = append(yyv1, Template{})
 				yyc1 = true
 
 			}
@@ -3855,7 +3855,7 @@ func (x codecSelfer6706) decSliceStack(v *[]Stack, d *codec1978.Decoder) {
 				z.DecSwallow()
 			} else {
 				if r.TryDecodeAsNil() {
-					yyv1[yyj1] = Stack{}
+					yyv1[yyj1] = Template{}
 				} else {
 					yyv1[yyj1].CodecDecodeSelf(d)
 				}
@@ -3867,7 +3867,7 @@ func (x codecSelfer6706) decSliceStack(v *[]Stack, d *codec1978.Decoder) {
 			yyv1 = yyv1[:yyj1]
 			yyc1 = true
 		} else if yyj1 == 0 && yyv1 == nil {
-			yyv1 = make([]Stack, 0)
+			yyv1 = make([]Template, 0)
 			yyc1 = true
 		}
 	}

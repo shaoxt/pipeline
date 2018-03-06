@@ -1,0 +1,46 @@
+@startuml
+
+== Application creation ==
+autonumber 1
+User -> PaaS: Ask for an Application creation
+PaaS -> Github: Create git repo, setup webhook url and secret
+Github -> PaaS: Git repo URL and secret
+PaaS -> K8S: Create Application, store info
+
+== User push code ==
+autonumber 1
+User -> Github: Push code
+Github -> PaaS: Webhook request includes git infos
+PaaS -> K8S: Create Pipeline for showing status
+PaaS -> PaaS: Trigger a Pipeline job
+PaaS -> Scheduler: Find or create an executor and schedule the job
+Scheduler -> Executor: Pick up job and run
+Executor -> K8S: Query Application and Template
+Executor -> Github: Checkout the repo
+Executor -> K8S: Update status on Pipeline
+Executor -> Executor: Build the code
+Executor -> K8S: Update status on Pipeline
+Executor -> Executor: Run test
+Executor -> K8S: Update status on Pipeline
+Executor -> DockerEngine: Packaging as docker image
+Executor -> K8S: Update status on Pipeline
+Executor -> DockerHub: Push image to dockerhub
+Executor -> K8S: Update status on Pipeline
+Executor -> K8S: Create or replace Deployment
+Executor -> PaaS: Job done!
+
+== Trigger build in K8S ==
+autonumber 1
+User --> K8S: Create a Pipeline
+PaaS --> K8S: Watch the Pipeline
+PaaS --> Scheduler: Trigger a Pipeline Job
+User --> K8S: Pull status
+
+== Trigger build in PaaS ==
+autonumber 1
+User --> PaaS: UI or API
+PaaS --> Scheduler: Trigger a Pipeline Job
+PaaS --> User: Status URI
+User --> PaaS: Pull status
+
+@enduml

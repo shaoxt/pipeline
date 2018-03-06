@@ -43,10 +43,10 @@ const (
 
 // Application Spec
 type ApplicationSpec struct {
-	//Application id is a unique identifier for the application
-	ApplicationId string `json:"applicationId"`
-	//Application Type
-	Stack Stack `json:"stack,omitempty"`
+	//The template this application pickup at creation time
+	InitialTemplate string `json:"initialTemplate,omitempty"`
+	//Application Template content for customization, if the template got changed by user
+	TemplateSpec `json:"inline"`
 	//Git Repo
 	GitRepo GitRepo `json:"gitRepo,omitempty"`
 	//Owner of the application
@@ -70,6 +70,8 @@ type GitRepo struct {
 type Status struct {
 	//Phase of the application
 	Phase Phase `json:"phase,omitempty"`
+	//Message
+	Message string `json:"message,omitempty"`
 	// RFC 3339 date and time
 	StartTime *metav1.Time `json:"startTime,omitempty"`
 }
@@ -87,15 +89,15 @@ const (
 // +genclient
 // +nonNamespaced
 
-type Stack struct {
+type Template struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ObjectMeta       `json:"metadata,omitempty"`
 
-	Spec   StackSpec   `json:"spec,omitempty"`
+	Spec   TemplateSpec   `json:"spec,omitempty"`
 	Status Status `json:"status,omitempty"`
 }
 
-type StackSpec struct {
+type TemplateSpec struct {
 	Language Language  `json:"language"`
 	ApplicationType ApplicationType  `json:"applicationType"`
 	SourceControl SourceControl `json:"sourceControl"`
@@ -103,6 +105,9 @@ type StackSpec struct {
 	TestTool TestTool `json:"testTool,omitempty"`
 	PackagingTool PackagingTool `json:"packagingTool"`
 	ImageRepo ImageRepo `json:"imageRepo,omitempty"`
+
+	Stage[] StageName `json:"stages"`
+
 	//Versioning scheme of the pipeline
 	VersioningScheme string `json:"versioningScheme,omitempty"`
 }
@@ -121,6 +126,7 @@ const (
 	Gradle   BuildTool = "Gradle"
 	Shell    BuildTool = "Shell"
 	Make     BuildTool = "make"
+	Javac    BuildTool = "javac"
 	//ETC.
 )
 
@@ -140,16 +146,17 @@ const (
 
 type ImageRepo string
 const (
+	DockerHub ImageRepo = "DockerHub"
 	ECR     ImageRepo = "ECR"
 	Nexus   ImageRepo = "Nexus"
 	//ETC.
 )
 
-type StackList struct {
+type TemplateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
 
-	Items []Stack `json:"items"`
+	Items []Template `json:"items"`
 }
 
 // +genclient

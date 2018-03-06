@@ -22,11 +22,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.tools;
+
+import org.eclipse.jgit.api.Git;
+import shaoxt.pipeline.crds.GitRepo;
+
+import java.io.File;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class GitUtil {
+
+
+    public static File gitClone(String appName, GitRepo repoInfo) throws Exception {
+        // Creation of a temp folder that will contain the Git repository
+        File workingDirectory = File.createTempFile(appName, "");
+        workingDirectory.delete();
+        workingDirectory.mkdirs();
+
+//
+//        // Create a Repository object
+//        Repository repo = FileRepositoryBuilder.create(new File(workingDirectory, ".git"));
+//        repo.create();
+
+        Git.cloneRepository()
+                .setDirectory(workingDirectory)
+                .setURI(repoInfo.getUrl())
+                .call();
+
+        return workingDirectory;
+    }
 }

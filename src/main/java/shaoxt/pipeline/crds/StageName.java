@@ -28,7 +28,7 @@ package shaoxt.pipeline.crds;
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public enum StageNames {
+public enum StageName {
     Checkout,
     Build,
     Test,

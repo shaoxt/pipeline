@@ -22,11 +22,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.orchestration.tasks;
+
+import org.ebayopensource.winder.TaskState;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * TaskState
+ *
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class TaskStateException extends Exception {
+
+    private TaskState state;
+
+    public TaskStateException(TaskState state, String message, Throwable cause) {
+        super(message, cause);
+        this.state = state;
+    }
+
+    public TaskState getState() {
+        return state;
+    }
 }

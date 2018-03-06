@@ -24,9 +24,11 @@
  */
 package shaoxt.pipeline.crds;
 
+import io.fabric8.kubernetes.client.CustomResourceList;
+
 /**
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class TemplateList extends CustomResourceList<Template> {
 }

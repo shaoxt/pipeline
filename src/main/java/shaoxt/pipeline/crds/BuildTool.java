@@ -29,5 +29,5 @@ package shaoxt.pipeline.crds;
  * @version 1.0
  */
 public enum BuildTool {
-    Maven, Gradle, Shell, Make
+    Maven, Gradle, Shell, Make, Javac
 }

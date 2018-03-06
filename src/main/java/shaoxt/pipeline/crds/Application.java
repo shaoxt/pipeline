@@ -24,31 +24,11 @@
  */
 package shaoxt.pipeline.crds;
 
-import io.fabric8.kubernetes.client.CustomResource;
-
 /**
  * Application
  *
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Application extends CustomResource {
-    private ApplicationSpec spec;
-
-    @Override
-    public String toString() {
-        return "Application{" +
-                "apiVersion='" + getApiVersion() + '\'' +
-                ", metadata=" + getMetadata() +
-                ", spec=" + spec +
-                '}';
-    }
-
-    public ApplicationSpec getSpec() {
-        return spec;
-    }
-
-    public void setSpec(ApplicationSpec spec) {
-        this.spec = spec;
-    }
+public class Application extends BaseResource<ApplicationSpec> {
 }

@@ -22,11 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.services;
+
+
+//import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.ws.config.annotation.WsConfigurerAdapter;
+import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
+import org.springframework.xml.xsd.XsdSchema;
 
 /**
+ * Web Service Config
+ *
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+@Configuration
+public class WebServiceConfig extends WsConfigurerAdapter {
+
+//    @Bean(name = "holiday")
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
+        DefaultWsdl11Definition wsdl = new DefaultWsdl11Definition();
+        wsdl.setPortTypeName("webhook");
+        wsdl.setLocationUri("/webhook/");
+        wsdl.setTargetNamespace("http://sheldon.io/pipeline");
+        wsdl.setSchema(countriesSchema);
+        return wsdl;
+    }
+
 }

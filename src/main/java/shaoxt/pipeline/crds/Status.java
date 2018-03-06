@@ -38,12 +38,30 @@ public class Status {
 
     private Date startTime;
 
+    public Status() {
+
+    }
+
+    public Status(String phase) {
+        setPhase(phase);
+    }
+
     public Phase getPhase() {
         return phase;
     }
 
     public void setPhase(Phase phase) {
         this.phase = phase;
+    }
+
+    public void setPhase(String phase) {
+        try {
+            this.phase = Phase.valueOf(phase);
+        }
+        catch (Exception ex) {
+            //TODO
+            this.phase = Phase.Unknown;
+        }
     }
 
     public String getMessage() {

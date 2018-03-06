@@ -123,6 +123,7 @@ const (
 	Gradle   BuildTool = "Gradle"
 	Shell    BuildTool = "Shell"
 	Make     BuildTool = "make"
+	Javac    BuildTool = "javac"
 	//ETC.
 )
 

@@ -27,6 +27,8 @@ package shaoxt.pipeline.crds;
 /**
  * Git Repo
  *
+ * TODO more information, such as branch, commit id etc.
+ *
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */

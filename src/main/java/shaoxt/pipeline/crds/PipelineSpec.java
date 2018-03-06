@@ -34,7 +34,7 @@ public class PipelineSpec extends BaseSpec {
 
     private String application;
     private List<String> stages;
-    private String currentStage;
+    private StageName currentStage;
 
     public String getApplication() {
         return application;
@@ -52,11 +52,11 @@ public class PipelineSpec extends BaseSpec {
         this.stages = stages;
     }
 
-    public String getCurrentStage() {
+    public StageName getCurrentStage() {
         return currentStage;
     }
 
-    public void setCurrentStage(String currentStage) {
+    public void setCurrentStage(StageName currentStage) {
         this.currentStage = currentStage;
     }
 }

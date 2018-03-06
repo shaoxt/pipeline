@@ -22,11 +22,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.client;
+
+import io.fabric8.kubernetes.client.Config;
+import io.fabric8.kubernetes.client.KubernetesClient;
+import shaoxt.pipeline.crds.Application;
+import shaoxt.pipeline.crds.Pipeline;
+import shaoxt.pipeline.crds.Template;
+
+import java.io.Closeable;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * Shared Kube Client
+ *
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public interface KubeClient extends Closeable {
+
+
+    Application getApplication(String application) throws Exception;
+
+
+    Pipeline getPipeline(String pipeline) throws Exception;
+
+
+    Template getTemplate(String template) throws Exception;
+
+    /**
+     * Tess Client
+     *
+     * @return KubernetesClient
+     */
+    KubernetesClient getKubernetesClient();
+
+    /**
+     * Return the config
+     *
+     * @return Config
+     */
+    Config getConfig();
 }

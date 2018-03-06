@@ -22,11 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.orchestration.tasks;
+
+import org.ebayopensource.winder.*;
+import shaoxt.pipeline.tools.DockerUtil;
+
+import java.io.File;
+
+import static shaoxt.pipeline.orchestration.PipelineConstants.IMAGE_ID;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class Packaging extends BasePipelineTask {
+    @Override
+    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+        File workDir = getWorkDir(result);
+        String imageId = DockerUtil.generateImage(workDir);
+        if (imageId != null) {
+            result.put(IMAGE_ID, imageId);
+            ctx.getJobContext().addUpdate(StatusEnum.EXECUTING, "Image id got created:" + imageId);
+            return TaskState.COMPLETED;
+        }
+        else {
+            ctx.getJobContext().addUpdate(StatusEnum.ERROR, "No image id got created");
+            return TaskState.ERROR;
+        }
+    }
 }

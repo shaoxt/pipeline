@@ -22,11 +22,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.app;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
+ * Application
+ *
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+@SpringBootApplication
+@ComponentScan(
+    {
+            "shaoxt.pipeline"
+    }
+)
+public class PipelineApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(PipelineApplication.class, args);
+    }
 }

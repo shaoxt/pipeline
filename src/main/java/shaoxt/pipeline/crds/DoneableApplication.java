@@ -24,9 +24,15 @@
  */
 package shaoxt.pipeline.crds;
 
+import io.fabric8.kubernetes.api.builder.Function;
+import io.fabric8.kubernetes.client.CustomResourceDoneable;
+
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class DoneableApplication extends CustomResourceDoneable<Application> {
+    public DoneableApplication(Application resource, Function function) {
+        super(resource, function);
+    }
 }

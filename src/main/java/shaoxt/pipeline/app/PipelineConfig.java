@@ -22,11 +22,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.app;
+
+import org.springframework.stereotype.Component;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import javax.ws.rs.ApplicationPath;
 
 /**
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+@Component
+@ApplicationPath("/webhook/v1")
+public class PipelineConfig extends ResourceConfig {
+    public PipelineConfig() {
+//        register(DeploymentPolicy.class);
+    }
 }

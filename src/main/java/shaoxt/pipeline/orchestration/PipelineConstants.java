@@ -22,11 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.orchestration;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public interface PipelineConstants {
+    String PIPELINE = "pipeline";
+    String APPLICATION = "application";
+    String WORK_DIR = "workDir";
+    String IMAGE_ID = "imageId";
 }

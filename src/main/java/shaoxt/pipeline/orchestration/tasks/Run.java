@@ -22,11 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.orchestration.tasks;
+
+import org.ebayopensource.winder.*;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class Run implements Task<TaskInput, TaskResult> {
+    @Override
+    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+        return TaskState.COMPLETED;
+    }
 }

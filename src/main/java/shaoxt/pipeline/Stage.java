@@ -22,11 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline;
+
+import shaoxt.pipeline.crds.StageName;
 
 /**
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public interface Stage {
+
+    StageName getName();
+
+    void execute(PipelineContext context);
 }

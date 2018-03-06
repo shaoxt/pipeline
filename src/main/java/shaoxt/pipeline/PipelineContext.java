@@ -22,11 +22,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline;
+
+import java.util.List;
+import java.util.Map;
 
 /**
+ * Pipeline Context hold all pipeline information
+ *
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public interface PipelineContext extends Map<String, Object> {
+
+    List<String> getStageNames();
+
+    String getCurrentStage();
+
+    String getString(String key);
+
+    int getInt(String key);
+
+    Map getMap(String key);
 }

@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: java-service
 spec:
-  stackSpec:
+  templateSpec:
      language: java
      applicationType: service
      sourceControl: Git

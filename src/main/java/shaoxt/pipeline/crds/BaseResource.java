@@ -24,9 +24,39 @@
  */
 package shaoxt.pipeline.crds;
 
+import io.fabric8.kubernetes.client.CustomResource;
+
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class BaseResource<S extends BaseSpec> extends CustomResource {
+    private S spec;
+    private Status status;
+
+    @Override
+    public String toString() {
+        return getClass().getName() + "{" +
+                "apiVersion='" + getApiVersion() + '\'' +
+                ", metadata=" + getMetadata() +
+                ", spec=" + spec +
+                '}';
+    }
+
+
+    public S getSpec() {
+        return spec;
+    }
+
+    public void setSpec(S spec) {
+        this.spec = spec;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }

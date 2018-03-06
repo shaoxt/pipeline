@@ -22,11 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline.crds;
+package shaoxt.pipeline.orchestration.tasks;
+
+import org.ebayopensource.winder.*;
+import shaoxt.pipeline.tools.DockerUtil;
+
+import static shaoxt.pipeline.orchestration.PipelineConstants.APPLICATION;
 
 /**
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Template extends BaseResource<TemplateSpec> {
+public class Ship extends BasePipelineTask {
+    @Override
+    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+        String applicationName = input.getString(APPLICATION);
+
+        try {
+            DockerUtil.pushImage(applicationName);
+            ctx.getJobContext().addUpdate(StatusEnum.EXECUTING, "Image pushed:" + applicationName);
+            return TaskState.COMPLETED;
+        }
+        catch(Exception ex) {
+            ctx.getJobContext().addUpdate(StatusEnum.ERROR, "Pushing image failed:" + ex.getMessage());
+            return TaskState.ERROR;
+        }
+    }
 }

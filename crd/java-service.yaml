@@ -3,11 +3,10 @@ kind: Template
 metadata:
   name: java-service
 spec:
-  templateSpec:
-     language: java
-     applicationType: service
-     sourceControl: Git
-     buildTool: Maven
-     testTool: JUnit
-     packagingTool: Docker
+   language: java
+   applicationType: service
+   sourceControl: Git
+   buildTool: Javac
+   testTool: JUnit
+   packagingTool: Docker
 status: Active

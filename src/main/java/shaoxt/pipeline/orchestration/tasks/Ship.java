@@ -35,7 +35,7 @@ import static shaoxt.pipeline.orchestration.PipelineConstants.APPLICATION;
  */
 public class Ship extends BasePipelineTask {
     @Override
-    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+    protected TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
         String applicationName = input.getString(APPLICATION);
 
         try {

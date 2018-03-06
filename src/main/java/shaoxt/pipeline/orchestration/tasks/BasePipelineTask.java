@@ -25,17 +25,17 @@
 package shaoxt.pipeline.orchestration.tasks;
 
 import org.ebayopensource.common.config.InjectProperty;
-import org.ebayopensource.winder.Task;
-import org.ebayopensource.winder.TaskInput;
-import org.ebayopensource.winder.TaskResult;
-import org.ebayopensource.winder.TaskState;
+import org.ebayopensource.winder.*;
 import shaoxt.pipeline.client.KubeClient;
 import shaoxt.pipeline.crds.Application;
+import shaoxt.pipeline.crds.Pipeline;
+import shaoxt.pipeline.crds.StageName;
 import shaoxt.pipeline.crds.Template;
 
 import java.io.File;
 
 import static shaoxt.pipeline.orchestration.PipelineConstants.APPLICATION;
+import static shaoxt.pipeline.orchestration.PipelineConstants.PIPELINE;
 import static shaoxt.pipeline.orchestration.PipelineConstants.WORK_DIR;
 
 /**
@@ -57,6 +57,24 @@ public abstract class BasePipelineTask implements Task<TaskInput, TaskResult> {
         this.kubeClient = kubeClient;
     }
 
+    @Override
+    public final TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+        String stage = getClass().getSimpleName();
+        String pipelineName = input.getString(PIPELINE);
+        Pipeline pipeline = kubeClient.getPipeline(pipelineName);
+        if (pipeline != null) {
+            pipeline.getSpec().setCurrentStage(StageName.valueOf(stage));
+        }
+
+        TaskState state = doExecute(ctx, input, result);
+        if (pipeline != null) {
+            //TODO add updating messages in kube
+            kubeClient.getPipelineOperation().createOrReplace(pipeline);
+        }
+        return state;
+    }
+
+    protected abstract TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception;
 
     public File getWorkDir(TaskResult result) {
         return new File(result.getString(WORK_DIR));
@@ -80,7 +98,7 @@ public abstract class BasePipelineTask implements Task<TaskInput, TaskResult> {
         try {
             Template template = kubeClient.getTemplate(templateName);
             if (template == null) {
-                throw new TaskStateException(TaskState.ERROR, "Template not found:" + template, null);
+                throw new TaskStateException(TaskState.ERROR, "Template not found:" + templateName, null);
             }
             return template;
         } catch (Exception e) {

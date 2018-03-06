@@ -40,7 +40,7 @@ import java.io.File;
 public class Build extends BasePipelineTask {
 
     @Override
-    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+    protected TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
 
         Application application = getApplication(input);
         File workDir = getWorkDir(result);

@@ -26,9 +26,9 @@ package shaoxt.pipeline.client;
 
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.KubernetesClient;
-import shaoxt.pipeline.crds.Application;
-import shaoxt.pipeline.crds.Pipeline;
-import shaoxt.pipeline.crds.Template;
+import io.fabric8.kubernetes.client.dsl.NonNamespaceOperation;
+import io.fabric8.kubernetes.client.dsl.Resource;
+import shaoxt.pipeline.crds.*;
 
 import java.io.Closeable;
 
@@ -48,6 +48,10 @@ public interface KubeClient extends Closeable {
 
 
     Template getTemplate(String template) throws Exception;
+
+
+    NonNamespaceOperation<Pipeline, PipelineList, DoneablePipeline,
+            Resource<Pipeline, DoneablePipeline>> getPipelineOperation();
 
     /**
      * Tess Client

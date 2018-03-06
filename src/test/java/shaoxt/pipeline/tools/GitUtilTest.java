@@ -1,5 +1,6 @@
 package shaoxt.pipeline.tools;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import shaoxt.pipeline.crds.GitRepo;
 
@@ -13,6 +14,7 @@ import static org.junit.Assert.*;
  */
 public class GitUtilTest {
     @Test
+    @Ignore
     public void gitClone() throws Exception {
         GitRepo repo = new GitRepo();
         repo.setUrl("https://github.com/shaoxt/helloworld.git");
@@ -21,7 +23,7 @@ public class GitUtilTest {
         boolean result = JavacUtil.javac(dir);
         System.out.println(result);
 
-        DockerUtil.generateImage("test", dir);
+        DockerUtil.generateImage(dir);
 
         DockerUtil.pushImage("helloworld");
     }

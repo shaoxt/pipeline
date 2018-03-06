@@ -24,12 +24,17 @@
  */
 package shaoxt.pipeline.crds;
 
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.fabric8.kubernetes.api.model.KubernetesResource;
 
 /**
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
+@JsonDeserialize(
+        using = JsonDeserializer.None.class
+)
 public class BaseSpec implements KubernetesResource {
 
     private String versioningScheme;

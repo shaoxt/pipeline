@@ -37,7 +37,7 @@ import static shaoxt.pipeline.orchestration.PipelineConstants.IMAGE_ID;
  */
 public class Packaging extends BasePipelineTask {
     @Override
-    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+    protected TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
         File workDir = getWorkDir(result);
         String imageId = DockerUtil.generateImage(workDir);
         if (imageId != null) {

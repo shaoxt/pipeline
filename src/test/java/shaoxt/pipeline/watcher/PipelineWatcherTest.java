@@ -13,7 +13,7 @@ public class PipelineWatcherTest {
     public void eventReceived() throws Exception {
 
         PipelineWatcher watcher = new PipelineWatcher();
-        watcher.setMasterUrl("https://192.168.99.100:8443/");
+
         watcher.init();
 
         Thread.sleep(2000000);

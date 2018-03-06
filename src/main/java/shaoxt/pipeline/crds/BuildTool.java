@@ -24,10 +24,24 @@
  */
 package shaoxt.pipeline.crds;
 
+//import com.fasterxml.jackson.annotation.JsonCreator;
+//import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
  */
 public enum BuildTool {
-    Maven, Gradle, Shell, Make, Javac
+    Maven, Gradle, Shell, Make, Javac;
+
+
+//    @JsonCreator
+//    public static BuildTool toBuildTool(String value) {
+//        return valueOf(value);
+//    }
+//
+//    @JsonValue
+//    public String toString() {
+//        return name();
+//    }
 }

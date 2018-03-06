@@ -24,15 +24,33 @@
  */
 package shaoxt.pipeline.orchestration.tasks;
 
+import io.fabric8.kubernetes.client.dsl.KubernetesListMixedOperation;
 import org.ebayopensource.winder.*;
 
+import java.io.File;
+
 /**
+ * TODO a simple runner for demo
+ * TODO The runtime related information should be in Application or ApplicationService
+ *
  * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public class Run implements Task<TaskInput, TaskResult> {
+public class Run extends BasePipelineTask {
     @Override
-    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+    protected TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+        File workDir = getWorkDir(result);
+        //TODO hardcode
+        File runFile = new File(workDir, "run.yaml");
+        if (runFile.exists()) {
+
+            KubernetesListMixedOperation listMixedOperation = kubeClient.getKubernetesClient().lists();
+            listMixedOperation.load(runFile);
+            ctx.getJobContext().addUpdate(StatusEnum.COMPLETED, "Run image on k8s");
+        }
+        else {
+            ctx.getJobContext().addUpdate(StatusEnum.COMPLETED, "No run.yaml");
+        }
         return TaskState.COMPLETED;
     }
 }

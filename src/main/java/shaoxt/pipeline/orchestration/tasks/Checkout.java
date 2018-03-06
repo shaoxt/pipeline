@@ -41,7 +41,7 @@ import static shaoxt.pipeline.orchestration.PipelineConstants.WORK_DIR;
 public class Checkout extends BasePipelineTask {
 
     @Override
-    public TaskState execute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
+    protected TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
         String applicationName = input.getString(APPLICATION);
         Application application = getApplication(input);
         GitRepo gitRepo = application.getSpec().getGitRepo();

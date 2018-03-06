@@ -26,6 +26,7 @@ package shaoxt.pipeline.app;
 
 import org.springframework.stereotype.Component;
 import org.glassfish.jersey.server.ResourceConfig;
+import shaoxt.pipeline.services.PipelineService;
 
 import javax.ws.rs.ApplicationPath;
 
@@ -34,9 +35,9 @@ import javax.ws.rs.ApplicationPath;
  * @version 1.0
  */
 @Component
-@ApplicationPath("/webhook/v1")
+@ApplicationPath("/v1")
 public class PipelineConfig extends ResourceConfig {
     public PipelineConfig() {
-//        register(DeploymentPolicy.class);
+        register(PipelineService.class);
     }
 }

@@ -29,6 +29,7 @@ import org.ebayopensource.winder.anno.DoneStep;
 import org.ebayopensource.winder.anno.ErrorStep;
 import org.ebayopensource.winder.anno.FirstStep;
 import org.ebayopensource.winder.anno.Job;
+import org.ebayopensource.winder.metadata.WinderStepRegistry;
 import shaoxt.pipeline.orchestration.tasks.*;
 
 /**
@@ -75,7 +76,6 @@ public enum PipelineJob implements Step<TaskInput, TaskResult, TaskContext<TaskI
             }
         }
     },
-
     TEST(30) {
         @Override
         public void execute(TaskContext<TaskInput, TaskResult> ctx) throws Exception {
@@ -112,7 +112,7 @@ public enum PipelineJob implements Step<TaskInput, TaskResult, TaskContext<TaskI
             }
         }
     },
-    RUN(40) {
+    RUN(60) {
         @Override
         public void execute(TaskContext<TaskInput, TaskResult> ctx) throws Exception {
             Run run = new Run();

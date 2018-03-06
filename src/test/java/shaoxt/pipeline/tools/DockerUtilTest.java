@@ -13,6 +13,7 @@ import com.github.dockerjava.core.command.BuildImageResultCallback;
 import com.github.dockerjava.core.command.PushImageResultCallback;
 import com.github.dockerjava.core.command.WaitContainerResultCallback;
 import org.eclipse.jgit.util.Base64;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.Closeable;
@@ -29,6 +30,7 @@ import static org.junit.Assert.*;
 public class DockerUtilTest {
 
     @Test
+    @Ignore
     public void buildImage() throws Exception {
         DockerClientBuilder clientBuilder = DockerClientBuilder.getInstance();
         try (DockerClient client = clientBuilder.build()) {
@@ -44,6 +46,7 @@ public class DockerUtilTest {
     }
 
     @Test
+    @Ignore
     public void pushImage() throws Exception {
         Properties properties = new Properties();
         try {

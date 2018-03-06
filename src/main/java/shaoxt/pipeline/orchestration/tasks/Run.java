@@ -24,10 +24,20 @@
  */
 package shaoxt.pipeline.orchestration.tasks;
 
-import io.fabric8.kubernetes.client.dsl.KubernetesListMixedOperation;
+import io.fabric8.kubernetes.api.model.HasMetadata;
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.PodTemplate;
+import io.fabric8.kubernetes.api.model.Service;
+import io.fabric8.kubernetes.api.model.extensions.Deployment;
+import io.fabric8.kubernetes.api.model.extensions.ReplicaSet;
+import io.fabric8.kubernetes.client.dsl.*;
+import org.apache.commons.io.FileUtils;
 import org.ebayopensource.winder.*;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
 
 /**
  * TODO a simple runner for demo
@@ -43,14 +53,31 @@ public class Run extends BasePipelineTask {
         //TODO hardcode
         File runFile = new File(workDir, "run.yaml");
         if (runFile.exists()) {
+            try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(runFile))) {
+                ParameterNamespaceListVisitFromServerGetDeleteRecreateWaitApplicable<HasMetadata,Boolean> list = kubeClient.getKubernetesClient().load(bis);
+                Applicable<List<HasMetadata>> objects = list.deletingExisting();
+                for(HasMetadata hasMetadata : objects.createOrReplace()) {
+                    if (hasMetadata instanceof Deployment) {
+                        kubeClient.getKubernetesClient().extensions().deployments().createOrReplace((Deployment)hasMetadata);
+                    }
+                    else if (hasMetadata instanceof Service) {
+                        kubeClient.getKubernetesClient().services().createOrReplace((Service)hasMetadata);
+                    }
+                    else if (hasMetadata instanceof Pod) {
+                        kubeClient.getKubernetesClient().pods().createOrReplace((Pod)hasMetadata);
+                    }
+                    else if (hasMetadata instanceof ReplicaSet) {
+                        kubeClient.getKubernetesClient().extensions().replicaSets().createOrReplace((ReplicaSet)hasMetadata);
+                    }
+                }
+                ctx.getJobContext().addUpdate(StatusEnum.COMPLETED, "Run image on k8s");
+            }
 
-            KubernetesListMixedOperation listMixedOperation = kubeClient.getKubernetesClient().lists();
-            listMixedOperation.load(runFile);
-            ctx.getJobContext().addUpdate(StatusEnum.COMPLETED, "Run image on k8s");
         }
         else {
             ctx.getJobContext().addUpdate(StatusEnum.COMPLETED, "No run.yaml");
         }
+        FileUtils.cleanDirectory(workDir);
         return TaskState.COMPLETED;
     }
 }

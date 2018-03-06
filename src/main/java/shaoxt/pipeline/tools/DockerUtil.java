@@ -27,6 +27,7 @@ package shaoxt.pipeline.tools;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.BuildImageCmd;
 import com.github.dockerjava.api.command.PushImageCmd;
+import com.github.dockerjava.api.command.TagImageCmd;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
 import com.github.dockerjava.core.command.BuildImageResultCallback;
@@ -62,7 +63,7 @@ public class DockerUtil {
         }
     }
 
-    public static String generateImage(File workDir) throws Exception {
+    public static String generateImage(String appName, File workDir) throws Exception {
         DefaultDockerClientConfig clientConfig
                 = new DefaultDockerClientConfig.Builder().withProperties(properties).build();
         DockerClientBuilder clientBuilder = DockerClientBuilder.getInstance(clientConfig);
@@ -73,6 +74,9 @@ public class DockerUtil {
             cmd.exec(waitContainerResultCallback);
             //TODO
             String imageId = waitContainerResultCallback.awaitImageId();
+            TagImageCmd tagImageCmd = client.tagImageCmd(imageId, "shaoxt/" + appName, "latest");
+            tagImageCmd.withForce(true);
+            tagImageCmd.exec();
             return imageId;
         }
     }

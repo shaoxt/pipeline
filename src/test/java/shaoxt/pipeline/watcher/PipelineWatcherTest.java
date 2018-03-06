@@ -12,11 +12,11 @@ public class PipelineWatcherTest {
     @Test
     public void eventReceived() throws Exception {
 
-        PipelineWatcher watcher = new PipelineWatcher();
+//        PipelineWatcher watcher = new PipelineWatcher();
+//
+//        watcher.init();
 
-        watcher.init();
-
-        Thread.sleep(2000000);
+//        Thread.sleep(2000000);
     }
 
 }

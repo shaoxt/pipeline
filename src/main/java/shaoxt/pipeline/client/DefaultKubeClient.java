@@ -55,7 +55,8 @@ public class DefaultKubeClient implements KubeClient {
 
     private String namespace = "default";
 
-    private String masterUrl;
+    //TODO
+    private String masterUrl = "https://192.168.99.101:8443/";
 
     private Config config;
 

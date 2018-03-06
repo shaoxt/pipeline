@@ -29,6 +29,7 @@ import shaoxt.pipeline.tools.DockerUtil;
 
 import java.io.File;
 
+import static shaoxt.pipeline.orchestration.PipelineConstants.APPLICATION;
 import static shaoxt.pipeline.orchestration.PipelineConstants.IMAGE_ID;
 
 /**
@@ -39,7 +40,8 @@ public class Packaging extends BasePipelineTask {
     @Override
     protected TaskState doExecute(TaskContext<TaskInput, TaskResult> ctx, TaskInput input, TaskResult result) throws Exception {
         File workDir = getWorkDir(result);
-        String imageId = DockerUtil.generateImage(workDir);
+        String applicationName = input.getString(APPLICATION);
+        String imageId = DockerUtil.generateImage(applicationName, workDir);
         if (imageId != null) {
             result.put(IMAGE_ID, imageId);
             ctx.getJobContext().addUpdate(StatusEnum.EXECUTING, "Image id got created:" + imageId);

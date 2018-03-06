@@ -24,6 +24,8 @@
  */
 package shaoxt.pipeline.crds;
 
+import java.util.List;
+
 /**
  * @author Sheldon Shao xshao@ebay.com on 3/4/18.
  * @version 1.0
@@ -43,6 +45,8 @@ public class TemplateSpec extends BaseSpec {
     private PackagingTool packagingTool;
 
     private ImageRepo imageRepo = ImageRepo.DockerHub;
+
+    private List<String> stages;
 
     public Language getLanguage() {
         return language;
@@ -98,5 +102,13 @@ public class TemplateSpec extends BaseSpec {
 
     public void setImageRepo(ImageRepo imageRepo) {
         this.imageRepo = imageRepo;
+    }
+
+    public List<String> getStages() {
+        return stages;
+    }
+
+    public void setStages(List<String> stages) {
+        this.stages = stages;
     }
 }

@@ -23,7 +23,7 @@ public class GitUtilTest {
         boolean result = JavacUtil.javac(dir);
         System.out.println(result);
 
-        DockerUtil.generateImage(dir);
+        DockerUtil.generateImage("helloworld", dir);
 
         DockerUtil.pushImage("helloworld");
     }

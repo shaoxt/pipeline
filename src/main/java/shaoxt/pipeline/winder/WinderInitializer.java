@@ -22,26 +22,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package shaoxt.pipeline;
+package shaoxt.pipeline.winder;
 
-import java.util.List;
-import java.util.Map;
+import org.ebayopensource.common.config.PropertyUtil;
+import org.ebayopensource.common.util.PropertyParameters;
+import org.ebayopensource.winder.WinderUtil;
+import org.ebayopensource.winder.quartz.QuartzConfiguration;
+import org.ebayopensource.winder.quartz.QuartzEngine;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.Properties;
 
 /**
- * Pipeline Context hold all pipeline information
- *
- * @author Sheldon Shao xshao@ebay.com on 3/4/18.
+ * @author Sheldon Shao xshao@ebay.com on 3/5/18.
  * @version 1.0
  */
-public interface PipelineContext extends Map<String, Object> {
+@Component
+public class WinderInitializer {
 
-    List<String> getStageNames();
+    private QuartzEngine engine;
 
-    String getCurrentStage();
+    @PostConstruct
+    public void start() {
+        QuartzConfiguration configuration = new QuartzConfiguration();
+        Properties properties = PropertyUtil.getResourceAsProperties("META-INF/winder.properties");
+        PropertyParameters parameters = new PropertyParameters(properties);
+        configuration.putAll(parameters);
 
-    String getString(String key);
+        engine = new QuartzEngine(configuration);
+        engine.start();
+    }
 
-    int getInt(String key);
-
-    Map getMap(String key);
+    @PreDestroy
+    public void stop() {
+        engine.stop();
+    }
 }
+

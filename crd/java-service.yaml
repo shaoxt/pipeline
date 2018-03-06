@@ -9,4 +9,10 @@ spec:
    buildTool: Javac
    testTool: JUnit
    packagingTool: Docker
+   stages:
+     - Checkout
+     - Build
+     - Packaging
+     - Ship
+     - Run
 status: Active

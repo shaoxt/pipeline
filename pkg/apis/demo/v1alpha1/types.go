@@ -105,6 +105,9 @@ type TemplateSpec struct {
 	TestTool TestTool `json:"testTool,omitempty"`
 	PackagingTool PackagingTool `json:"packagingTool"`
 	ImageRepo ImageRepo `json:"imageRepo,omitempty"`
+
+	Stage[] StageName `json:"stages"`
+
 	//Versioning scheme of the pipeline
 	VersioningScheme string `json:"versioningScheme,omitempty"`
 }

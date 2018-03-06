@@ -37,7 +37,10 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(
     {
-            "shaoxt.pipeline"
+            "shaoxt.pipeline.app",
+            "shaoxt.pipeline.client",
+            "shaoxt.pipeline.winder",
+            "shaoxt.pipeline.services"
     }
 )
 public class PipelineApplication {
